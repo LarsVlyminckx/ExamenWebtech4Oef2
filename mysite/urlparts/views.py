@@ -8,14 +8,14 @@ import redis
 r = redis.StrictRedis(host='localhost', port=6379, db = 0);
 my_list  = []
 def index(request):
-    answer = request.get_full_path()
-    return render(request,'index.html',{'answer':answer});
+    return render(request,'index.html',{'answer':my_list});
 def andereurl(request):
     answer = request.get_full_path()
-    #if "//" in answer:
-    #    return render(request,'index.html',{'answer':'answer'})
-    #else:
-    answer = answer.split('/', 2)[2]
-    answer = answer.replace('/','---')
-    my_list .append(answer)
+    if "//" in answer:
+        return render(request,'index.html',{'answer':my_list})
+    else:
+        answer = answer.split('/', 2)[2]
+        answer = answer.replace('/','---')
+        my_list .append(answer)
+        answer = ""
     return render(request,'index.html',{'answer':my_list})
