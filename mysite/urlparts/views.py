@@ -8,4 +8,9 @@ import redis
 r = redis.StrictRedis(host='localhost', port=6379, db = 0);
 
 def index(request):
-    return render(request,'index.html');
+    answer = request.get_full_path()
+    return render(request,'index.html',{'answer':answer});
+def andereurl(request):
+    answer = request.get_full_path()
+    answer = answer.split('/', 1)[1]
+    return render(request,'index.html',{'answer':answer});
